@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+telegram_bot.egg-info/PKG-INFO
+telegram_bot.egg-info/SOURCES.txt
+telegram_bot.egg-info/dependency_links.txt
+telegram_bot.egg-info/requires.txt
+telegram_bot.egg-info/top_level.txt
+telegram_notifications/__init__.py
+telegram_notifications/send_bot_message.py
