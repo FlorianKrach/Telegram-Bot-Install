@@ -29,11 +29,11 @@ from telegram_notifications import send_bot_message as SBM
 
 send message and files with default token to default chat_id
 ```
-SBM.send_notification(text='', files=['test.txt',], text_for_files='test-file')
+SBM.send_notification(text='', files=['README.md',], text_for_files='test-file')
 ```
 
 send message and files to certain chat_id with certain token (bot identifier)
 ```
-SBM.send_notification(text='', files=['test.txt',], chat_id="...", token="...")
+SBM.send_notification(text='', files=['README.md',], chat_id="...", token="...")
 ```
 
