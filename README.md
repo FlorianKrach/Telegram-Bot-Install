@@ -12,14 +12,14 @@ To get chat_id of a chat where a bot with token ```<token>``` was added:
 
 ## Installation
 
-Download or clone this repo, then open the file `telegram_notifications/send_bot_message.py`
-and replace the `token = None` by `token = "<your-bot-token>"` (follow this [tutorial](https://core.telegram.org/bots/tutorial) 
-to get the token). If you want you can also add a default chat_id. Then
-
+Download or clone this repo, then run:
 ```shell
 cd Telegram-Bot-Install
 python setup.py install
 ```
+this will install the package and all requirements. It will also ask you for the
+token of your telegram bot to install it as default (=> you don't need to specify it
+every time you send a message).
 
 
 ## Usage

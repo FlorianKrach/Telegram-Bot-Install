@@ -20,6 +20,27 @@ chat_id = None
 
 
 # ==============================================================================
+def send_message(bot, **kwargs):
+    try:
+        bot.send_message(**kwargs)
+    except telegram.TelegramError as e:
+        print("TELEGRAM BOT: Error while sending message:")
+        print(e)
+        print("wait for 35 seconds and try again")
+        time.sleep(35)
+        bot.send_message(**kwargs)
+
+def send_document(bot, filename, **kwargs):
+    try:
+        bot.send_document(document=open(filename, 'rb'), **kwargs)
+    except telegram.TelegramError as e:
+        print("TELEGRAM BOT: Error while sending document:")
+        print(e)
+        print("wait for 35 seconds and try again")
+        time.sleep(35)
+        print("try again")
+        bot.send_document(document=open(filename, 'rb'), **kwargs)
+
 def send_notification(
         text='test', files=None, text_for_files=None, chat_id=chat_id, token=token
 ):
@@ -30,15 +51,16 @@ def send_notification(
                 f_name = 'long_message_{}.txt'.format(time.time())
                 with open(f_name, "w") as f:
                     f.write(text)
-                bot.send_document(chat_id=chat_id, document=open(f_name, 'rb'),
-                                  caption="too long message -> send as file")
+                send_document(
+                    bot=bot, filename=f_name, chat_id=chat_id,
+                    caption="too long message -> send as file")
                 os.remove(f_name)
             else:
-                bot.send_message(chat_id=chat_id, text=text)
+                send_message(bot=bot, chat_id=chat_id, text=text)
         if files:
             for f in files:
-                bot.send_document(chat_id=chat_id, document=open(f, 'rb'),
-                                  caption=text_for_files)
+                send_document(bot=bot, filename=f, chat_id=chat_id,
+                              caption=text_for_files)
     except Exception as e:
         print(e)
 
