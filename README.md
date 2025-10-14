@@ -13,13 +13,15 @@ To get the chat_id of a chat where a bot with token ```<token>``` was added:
 
 
 ## Release note:
-- if using python<3.9 use the release v1.0.1 which works with python-telegram-bot==12.8 (TODO: change to this tag!)
-- if using python>=3.9 use the release v2.0.0 which works with python-telegram-bot==22.5 (default)
+- if using python<3.9 use the release v1.0.1 which works with python-telegram-bot==12.8
+- if using python>=3.9 use the release v2.0.0 which works with python-telegram-bot==22.5
 
 
 ## Installation
 
-Download or clone this repo, then run:
+### Manual installation
+Download or clone this repo, then run
+
 ```shell
 cd Telegram-Bot-Install
 pip install dist/telegram_bot-<version>-py3-none-any.whl --upgrade
@@ -28,6 +30,22 @@ pip install dist/telegram_bot-<version>-py3-none-any.whl --upgrade
 pip install dist/telegram_bot-2.0.0-py3-none-any.whl --upgrade
 ```
 this will install the package and all requirements. 
+
+### Installation from GitHub
+One can directly install the package from GitHub by running:
+
+```shell
+# latest version
+pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install
+
+# version v2.0.0
+pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install@v2.0.0
+
+# version v1.0.1
+pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install@v1.0.1
+```
+
+### Token info
 
 For using the telegram-bot without providing the token each time, the token can for example be placed in the installed package file `send_bot_message.py`.
 
