@@ -5,7 +5,9 @@ using a telegram bot.
 
 It has a certain chat_id and a bot token saved for easy use.
 
-To get chat_id of a chat where a bot with token ```<token>``` was added:
+First you need a Telegram-Bot, i.e., its `token`. If you do not yet have one, you can get a token following these [instructions](https://core.telegram.org/bots/features#creating-a-new-bot).
+
+To get the chat_id of a chat where a bot with token ```<token>``` was added:
 - in this chat send the message "/test"
 - in a browser open: ```https://api.telegram.org/bot<token>/getUpdates```
 
