@@ -24,9 +24,9 @@ Download or clone this repo, then run:
 cd Telegram-Bot-Install
 python setup.py install
 ```
-this will install the package and all requirements. It will also ask you for the
-token of your telegram bot to install it as default (=> you don't need to specify it
-every time you send a message).
+this will install the package and all requirements. 
+
+For using the telegram-bot without providing the token each time, the token can for example be placed in the installed package file `send_bot_message.py`.
 
 
 ## Usage
