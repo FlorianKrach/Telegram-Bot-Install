@@ -1,9 +1,5 @@
 # Telegram-Bot
 
-Release note:
-- if using python<3.9 use the release v1.0.1 which works with python-telegram-bot==12.8
-- if using python>=3.9 use the release v2.0.0 which works with python-telegram-bot==22.5
-
 This is a package for sending notifications to a chat 
 using a telegram bot.
 
@@ -14,6 +10,11 @@ First you need a Telegram-Bot, i.e., its `token`. If you do not yet have one, yo
 To get the chat_id of a chat where a bot with token ```<token>``` was added:
 - in this chat send the message "/test"
 - in a browser open: ```https://api.telegram.org/bot<token>/getUpdates```
+
+
+## Release note:
+- if using python<3.9 use the release v1.0.1 which works with python-telegram-bot==12.8 (TODO: change to this tag!)
+- if using python>=3.9 use the release v2.0.0 which works with python-telegram-bot==22.5 (default)
 
 
 ## Installation
