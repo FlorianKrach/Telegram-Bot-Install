@@ -22,7 +22,10 @@ To get the chat_id of a chat where a bot with token ```<token>``` was added:
 Download or clone this repo, then run:
 ```shell
 cd Telegram-Bot-Install
-python setup.py install
+pip install dist/telegram_bot-<version>-py3-none-any.whl --upgrade
+
+# latest version
+pip install dist/telegram_bot-2.0.0-py3-none-any.whl --upgrade
 ```
 this will install the package and all requirements. 
 
