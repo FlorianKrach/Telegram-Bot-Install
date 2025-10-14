@@ -1,16 +1,16 @@
 Metadata-Version: 2.4
 Name: telegram-bot
-Version: 1.0.1
-Summary: easy package for sending notifications with a telegram bot
+Version: 2.0.0
+Summary: simple package for sending notifications with a telegram bot
 Author: Florian Krach
 Author-email: florian.krach@me.com
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
-Requires-Python: >=3.6
+Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
-Requires-Dist: python-telegram-bot==12.8
+Requires-Dist: python-telegram-bot==22.5
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
@@ -35,6 +35,11 @@ To get the chat_id of a chat where a bot with token ```<token>``` was added:
 - in a browser open: ```https://api.telegram.org/bot<token>/getUpdates```
 
 
+## Release note:
+- if using python<3.9 use the release v1.0.1 which works with python-telegram-bot==12.8 (TODO: change to this tag!)
+- if using python>=3.9 use the release v2.0.0 which works with python-telegram-bot==22.5 (default)
+
+
 ## Installation
 
 Download or clone this repo, then run:
@@ -42,9 +47,9 @@ Download or clone this repo, then run:
 cd Telegram-Bot-Install
 python setup.py install
 ```
-this will install the package and all requirements. It will also ask you for the
-token of your telegram bot to install it as default (=> you don't need to specify it
-every time you send a message).
+this will install the package and all requirements. 
+
+For using the telegram-bot without providing the token each time, the token can for example be placed in the installed package file `send_bot_message.py`.
 
 
 ## Usage

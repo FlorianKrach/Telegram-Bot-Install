@@ -7,7 +7,7 @@ author: Florian Krach
 import telegram
 import time
 import os
-
+import asyncio
 
 # ==============================================================================
 # GLOBAL VARIABLES
@@ -20,49 +20,58 @@ chat_id = None
 
 
 # ==============================================================================
-def send_message(bot, **kwargs):
+async def send_message(bot, **kwargs):
     try:
-        bot.send_message(**kwargs)
+        await bot.send_message(**kwargs)
     except telegram.TelegramError as e:
         print("TELEGRAM BOT: Error while sending message:")
         print(e)
         print("wait for 35 seconds and try again")
         time.sleep(35)
-        bot.send_message(**kwargs)
+        await bot.send_message(**kwargs)
 
-def send_document(bot, filename, **kwargs):
+async def send_document(bot, filename, **kwargs):
     try:
-        bot.send_document(document=open(filename, 'rb'), **kwargs)
+        await bot.send_document(document=open(filename, 'rb'), **kwargs)
     except telegram.TelegramError as e:
         print("TELEGRAM BOT: Error while sending document:")
         print(e)
         print("wait for 35 seconds and try again")
         time.sleep(35)
         print("try again")
-        bot.send_document(document=open(filename, 'rb'), **kwargs)
+        await bot.send_document(document=open(filename, 'rb'), **kwargs)
 
-def send_notification(
+async def _send_notification(
         text='test', files=None, text_for_files=None, chat_id=chat_id, token=token
 ):
     try:
         bot = telegram.Bot(token=token)
-        if text:
-            if len(text) > 4096:
-                f_name = 'long_message_{}.txt'.format(time.time())
-                with open(f_name, "w") as f:
-                    f.write(text)
-                send_document(
-                    bot=bot, filename=f_name, chat_id=chat_id,
-                    caption="too long message -> send as file")
-                os.remove(f_name)
-            else:
-                send_message(bot=bot, chat_id=chat_id, text=text)
-        if files:
-            for f in files:
-                send_document(bot=bot, filename=f, chat_id=chat_id,
-                              caption=text_for_files)
+        async with bot:
+            if text:
+                if len(text) > 4096:
+                    f_name = 'long_message_{}.txt'.format(time.time())
+                    with open(f_name, "w") as f:
+                        f.write(text)
+                    await send_document(
+                        bot=bot, filename=f_name, chat_id=chat_id,
+                        caption="too long message -> send as file")
+                    os.remove(f_name)
+                else:
+                    await send_message(bot=bot, chat_id=chat_id, text=text)
+            if files:
+                for f in files:
+                    await send_document(bot=bot, filename=f, chat_id=chat_id,
+                                  caption=text_for_files)
     except Exception as e:
         print(e)
+
+
+def send_notification(
+        text='test', files=None, text_for_files=None, chat_id=chat_id, token=token
+):
+    asyncio.run(_send_notification(
+        text=text, files=files, text_for_files=text_for_files, chat_id=chat_id, token=token))
+
 
 
 if __name__ == '__main__':
