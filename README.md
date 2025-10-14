@@ -1,5 +1,9 @@
 # Telegram-Bot
 
+Release note:
+- if using python<3.9 use the release v1.0.1 which works with python-telegram-bot==12.8
+- if using python>=3.9 use the release v2.0.0 which works with python-telegram-bot==22.5
+
 This is a package for sending notifications to a chat 
 using a telegram bot.
 
