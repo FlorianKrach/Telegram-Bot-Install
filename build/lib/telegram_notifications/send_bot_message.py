@@ -4,6 +4,12 @@ author: Florian Krach
 
 # ==============================================================================
 # IMPORTS
+import logging
+
+# the following supresses the extensive logging of the telegram package to the IO
+logging.getLogger("telegram").setLevel(logging.WARNING)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
 import telegram
 import time
 import os
@@ -20,29 +26,45 @@ chat_id = None
 
 
 # ==============================================================================
-async def send_message(bot, **kwargs):
+async def send_message(bot, n_try=0, max_tries=10, wait_time=35, **kwargs):
     try:
         await bot.send_message(**kwargs)
-    except telegram.TelegramError as e:
+    except Exception as e:
         print("TELEGRAM BOT: Error while sending message:")
         print(e)
-        print("wait for 35 seconds and try again")
-        time.sleep(35)
-        await bot.send_message(**kwargs)
+        if n_try < max_tries:
+            print(f"wait for {wait_time} seconds and try again")
+            time.sleep(wait_time)
+            print(f"try again (n_try={n_try+2}/{max_tries})")
+            await send_message(
+                bot, n_try=n_try+1, max_tries=max_tries,
+                wait_time=wait_time, **kwargs)
+        else:
+            print(f"TELEGRAM BOT: max tries ({max_tries}) reached for sending message "
+                  f"-> abort sending message")
 
-async def send_document(bot, filename, **kwargs):
+async def send_document(
+        bot, n_try=0, max_tries=10, wait_time=35, filename=None, **kwargs
+):
     try:
         await bot.send_document(document=open(filename, 'rb'), **kwargs)
-    except telegram.TelegramError as e:
+    except Exception as e:
         print("TELEGRAM BOT: Error while sending document:")
         print(e)
-        print("wait for 35 seconds and try again")
-        time.sleep(35)
-        print("try again")
-        await bot.send_document(document=open(filename, 'rb'), **kwargs)
+        if n_try < max_tries:
+            print(f"wait for {wait_time} seconds and try again")
+            time.sleep(wait_time)
+            print(f"try again (n_try={n_try+2}/{max_tries})")
+            await send_document(
+                bot, n_try=n_try+1, max_tries=max_tries, wait_time=wait_time,
+                filename=filename, **kwargs)
+        else:
+            print(f"TELEGRAM BOT: max tries ({max_tries}) reached for sending document "
+                  f"-> abort sending document")
 
 async def _send_notification(
-        text='test', files=None, text_for_files=None, chat_id=chat_id, token=token
+        text='test', files=None, text_for_files=None, chat_id=chat_id,
+        token=token, max_tries=10, wait_time=35,
 ):
     try:
         bot = telegram.Bot(token=token)
@@ -54,20 +76,25 @@ async def _send_notification(
                         f.write(text)
                     await send_document(
                         bot=bot, filename=f_name, chat_id=chat_id,
+                        n_try=0, max_tries=max_tries, wait_time=wait_time,
                         caption="too long message -> send as file")
                     os.remove(f_name)
                 else:
-                    await send_message(bot=bot, chat_id=chat_id, text=text)
+                    await send_message(
+                        bot=bot, chat_id=chat_id, text=text,
+                        n_try=0, max_tries=max_tries, wait_time=wait_time)
             if files:
                 for f in files:
-                    await send_document(bot=bot, filename=f, chat_id=chat_id,
-                                  caption=text_for_files)
+                    await send_document(
+                        bot=bot, filename=f, chat_id=chat_id, caption=text_for_files,
+                        n_try=0, max_tries=max_tries, wait_time=wait_time)
     except Exception as e:
         print(e)
 
 
 def send_notification(
-        text='test', files=None, text_for_files=None, chat_id=chat_id, token=token
+        text='test', files=None, text_for_files=None, chat_id=chat_id,
+        token=token, max_tries=10, wait_time=35,
 ):
     asyncio.run(_send_notification(
         text=text, files=files, text_for_files=text_for_files, chat_id=chat_id, token=token))
