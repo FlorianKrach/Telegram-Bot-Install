@@ -20,7 +20,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="telegram-bot",
-    version="2.0.0",
+    version="2.1.0",
     author="Florian Krach",
     author_email="florian.krach@me.com",
     description="simple package for sending notifications with a telegram bot",
