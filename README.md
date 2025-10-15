@@ -14,10 +14,24 @@ To get the chat_id of a chat where a bot with token ```<token>``` was added:
 
 ## Release note:
 - if using python<3.9 use the release v1.0.1 which works with python-telegram-bot==12.8
-- if using python>=3.9 use the release v2.0.0 which works with python-telegram-bot==22.5
+- if using python>=3.9 use the release v2.1.0 which works with python-telegram-bot==22.5
 
 
 ## Installation
+
+### Installation from GitHub (Suggested)
+One can directly install the package from GitHub by running:
+
+```shell
+# latest version
+pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install
+
+# version v2.1.0
+pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install@v2.1.0
+
+# version v1.0.1
+pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install@v1.0.1
+```
 
 ### Manual installation
 Download or clone this repo, then run
@@ -26,24 +40,13 @@ Download or clone this repo, then run
 cd Telegram-Bot-Install
 pip install dist/telegram_bot-<version>-py3-none-any.whl --upgrade
 
-# latest version
-pip install dist/telegram_bot-2.0.0-py3-none-any.whl --upgrade
-```
-this will install the package and all requirements. 
-
-### Installation from GitHub
-One can directly install the package from GitHub by running:
-
-```shell
-# latest version
-pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install
-
-# version v2.0.0
-pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install@v2.0.0
+# latest version (v2.1.0)
+pip install dist/telegram_bot-2.1.0-py3-none-any.whl --upgrade
 
 # version v1.0.1
-pip install git+https://github.com/FlorianKrach/Telegram-Bot-Install@v1.0.1
+pip install dist/telegram_bot-1.0.1-py3-none-any.whl --upgrade
 ```
+this will install the package and all requirements. 
 
 ### Token info
 
