@@ -1,26 +1,14 @@
-"""
-author: Florian Krach
-"""
-import os.path
+"""author: Florian Krach"""
 
 import setuptools
-import inspect
-import atexit
-from setuptools.command.install import install
 
-
-
-
-with open("README.md", "r") as fh:
+with open("README.md", "r") as fh:  # noqa: PTH123
     long_description = fh.read()
-
-
-
 
 
 setuptools.setup(
     name="telegram-bot",
-    version="2.1.0",
+    version="2.2.0",
     author="Florian Krach",
     author_email="florian.krach@me.com",
     description="simple package for sending notifications with a telegram bot",
@@ -33,7 +21,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.9',
+    python_requires=">=3.9",
 )
-
-

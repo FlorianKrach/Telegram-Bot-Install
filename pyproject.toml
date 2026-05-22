@@ -1,10 +1,11 @@
 [project]
 name = "telegram-bot"
-version = "2.1.0"
+version = "2.2.0"
 readme = "README.md"
 requires-python = ">=3.9,<3.13"
 dependencies = [
     "python-telegram-bot==22.5",
+    "setuptools>=82.0.1",
 ]
 
 [dependency-groups]
